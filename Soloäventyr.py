@@ -113,11 +113,16 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
             hantera_spelet(plats, halsa, inventarium, attack, smidighet)
     elif plats == "stenbron":
         print_slow("Du står på en smal stenbro över en avgrund. Vad gör du?")
-        val = input("Gå över (ö) eller gå tillbaka (g)? ")
+        print_slow("1.Gå över (ö)\n"
+        "2.Gå tillbaka (g)\n"
+        "3.Spara spelet (s)")
+        val = input("Skriv din val: ")
         if val == "ö":
             plats = "hemlig_kammare"
             print_slow("Du går över bron.")
             hantera_spelet(plats, halsa, inventarium, attack, smidighet)
+        elif val == "s":
+            spara_spelet()
         elif val == "g":
             plats = "mork_gang"
             print_slow("Du går tillbaka.")
