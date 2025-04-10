@@ -132,7 +132,9 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
             hantera_spelet(plats, halsa, inventarium, attack, smidighet)
     elif plats == "hemlig_kammare":
         print_slow("Du hittar en hemlig kammare med en gammal bok.")
-        val = input("Läsa boken (l) eller gå tillbaka (g)? ")
+        print_slow("1.Läsa boken (l) \n" 
+        "2.Gå tillbaka (g)? ")
+        val = input("Skriv din val: ")
         if val == "l":
             print_slow("Du läser boken och hittar en sk formel!")
             inventarium.append("sk_formel")
@@ -147,7 +149,9 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
             hantera_spelet(plats, halsa, inventarium, attack, smidighet)
     elif plats == "avgrunden":
         print_slow("Du står vid en djup avgrund. Du ser en liten stig på andra sidan.")
-        val = input("Använd formeln (a) eller gå tillbaka (g)? ")
+        print_slow("1.Använd formeln (a)\n" 
+        "2.Gå tillbaka (g)? ")
+        val = input("Skriv din val: ")
         if val == "a" and "sk_formel" in inventarium:
             plats = "utgangen"
             print_slow("Du använder formeln och skapar en tillfällig bro!")
