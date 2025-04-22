@@ -1,5 +1,6 @@
 import time,os,sys
 
+#Funktioner
 def clear_terminal():
     if os.name == "nt":
         os.system("cls")
@@ -15,9 +16,7 @@ def print_slow(Text):
 #  Funktion för att visa menyn
 def visa_menyn():
     print_slow("1. Starta nytt spel")
-    print_slow("2. Spara spelet")
-    print_slow("3. Ladda spelet")
-    print_slow("4. Avsluta")
+    print_slow("2. Avsluta")
 
 # Funktion för att starta spelet
 def starta_spel():
@@ -58,15 +57,12 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
     if plats == "grottan":
         print_slow("Du ser två vägar framåt.")
         print_slow("1.Vänster (v)\n"
-        "2.Höger (h)? \n"
-        "3.Spara spelet (s)")
+        "2.Höger (h)?")
         val = input("Skriv din val: ")
         if val == "v":
             plats = "skattkammaren"
             print_slow("Du går vänster.")
             hantera_spelet(plats, halsa, inventarium, attack, smidighet)
-        elif val == "s":
-            spara_spelet()
         elif val == "h":
             plats = "mork_gang"
             print_slow("Du går höger.")
@@ -77,8 +73,7 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
     elif plats == "skattkammaren":
         print_slow("Du hittar en skattkista! Men en goblin vaktar den.")
         print_slow("1.Slåss (a)\n"
-        "2.Gå tillbaka (g)\n"
-        "3.Spara spelet (s)")
+        "2.Gå tillbaka (g)")
         val = input("Skriv din val: ")
         if val == "a":
             print_slow("Du slåss mot goblinen!")
@@ -92,8 +87,6 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
                 print_slow("Du hittade guld!")
                 plats = "grottan"
                 hantera_spelet(plats, halsa, inventarium, attack, smidighet)
-        elif val == "s":
-            spara_spelet()
         elif val == "g":
             plats = "grottan"
             print_slow("Du går tillbaka.")
@@ -114,15 +107,12 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
     elif plats == "stenbron":
         print_slow("Du står på en smal stenbro över en avgrund. Vad gör du?")
         print_slow("1.Gå över (ö)\n"
-        "2.Gå tillbaka (g)\n"
-        "3.Spara spelet (s)")
+        "2.Gå tillbaka (g)")
         val = input("Skriv din val: ")
         if val == "ö":
             plats = "hemlig_kammare"
             print_slow("Du går över bron.")
             hantera_spelet(plats, halsa, inventarium, attack, smidighet)
-        elif val == "s":
-            spara_spelet()
         elif val == "g":
             plats = "mork_gang"
             print_slow("Du går tillbaka.")
@@ -168,32 +158,6 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
         print_slow("Grattis!")
         return
 
-# Funktion för att spara spelet
-def spara_spelet(plats, halsa, inventarium, attack, smidighet):
-    try:
-        with open("savegame.txt", "w") as fil:
-            fil.write(f"{plats}\n{halsa}\n{inventarium}\n{attack}\n{smidighet}")
-        print_slow("Spelet sparades!")
-        visa_menyn()
-    except:
-        print_slow("Kunde inte spara spelet.")
-
-# Funktion för att ladda spelet 
-def ladda_spelet():
-    try:
-        with open("savegame.txt", "r") as fil:
-            plats = fil.readline().strip()
-            halsa = int(fil.readline().strip())
-            inventarium = eval(fil.readline().strip())
-            attack = int(fil.readline().strip())
-            smidighet = int(fil.readline().strip())
-        print_slow("Spelet laddades!")
-        hantera_spelet(plats, halsa, inventarium, attack, smidighet)
-    except FileNotFoundError:
-        print_slow("Ingen sparfil hittades.")
-    except:
-        print_slow("Kunde inte ladda spelet.")
-
 # Huvudprogram
 game_is_on= True
 
@@ -204,11 +168,5 @@ while game_is_on == True:
         clear_terminal()
         starta_spel()
     elif val == "2":
-        clear_terminal()
-        spara_spelet()
-    elif val == "3":
-        clear_terminal()
-        ladda_spelet()
-    elif val == "4":
         print_slow("Du avslutade spelet.")
         break
