@@ -51,6 +51,7 @@ def starta_spel():
                 print_slow("Ogiltigt val.")
         except:
             print_slow("Ogiltigt val.")
+            starta_spel()
 
     print_slow("Du vaknar i en mörk grotta.")
     plats = "grottan"
@@ -165,6 +166,7 @@ def hantera_spelet(plats, halsa, inventarium, attack, smidighet):
             return
     except:
         print_slow("Något gick fel. Välja ett annan alternativ.")
+        hantera_spelet()
 
 # Huvudprogram
 game_is_on= True
